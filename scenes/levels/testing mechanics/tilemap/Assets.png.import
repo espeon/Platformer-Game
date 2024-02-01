@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnqlvxmt0dss3"
-path="res://.godot/imported/particle.png-be831772100cf3f8588171e15717530c.ctex"
+uid="uid://dfb1db1ikixm6"
+path="res://.godot/imported/Assets.png-6ca519b4aa57762e9ff1dc9ac86b9a71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/other/particle.png"
-dest_files=["res://.godot/imported/particle.png-be831772100cf3f8588171e15717530c.ctex"]
+source_file="res://scenes/levels/testing mechanics/tilemap/Assets.png"
+dest_files=["res://.godot/imported/Assets.png-6ca519b4aa57762e9ff1dc9ac86b9a71.ctex"]
 
 [params]
 
