@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=45 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/character bodies/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/character bodies/player/player.gd" id="1_lsbkp"]
-[ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/other/lives/lives.tscn" id="2_73gsv"]
+[ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/character bodies/player/lives/lives.tscn" id="2_73gsv"]
+[ext_resource type="PackedScene" uid="uid://dp2uxssvjxdax" path="res://scenes/character bodies/player/state machine/player_state_machine.tscn" id="3_fgvg1"]
 [ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/character bodies/player/CrouchCollisionShape.tres" id="3_ruosv"]
 [ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/character bodies/player/StandingCollisionShape.tres" id="4_ces4e"]
 [ext_resource type="Texture2D" uid="uid://dnqlvxmt0dss3" path="res://scenes/character bodies/player/particle.png" id="5_38dyt"]
@@ -437,6 +438,7 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
+graph_offset = Vector2(-538.647, 45.542)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
 nodes/air_crouch/position = Vector2(240, 500)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
@@ -474,6 +476,7 @@ particles_anim_loop = false
 colors = PackedColorArray(0.880983, 0.956011, 0.815313, 0.976471, 0.476978, 0.642161, 0.529121, 0)
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(160, 105.5)
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 5
@@ -483,11 +486,13 @@ metadata/player = false
 
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
 
+[node name="PlayerStateMachine" parent="." instance=ExtResource("3_fgvg1")]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"idle"
-frame = 1
+animation = &"attack (light)"
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -495,6 +500,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_vgy7v")
 }
@@ -512,9 +518,9 @@ parameters/is_alive/current_index = 0
 parameters/movement/current_state = "static"
 parameters/movement/transition_request = ""
 parameters/movement/current_index = 0
-parameters/static_crouching/current_state = "idle"
+parameters/static_crouching/current_state = "crouch"
 parameters/static_crouching/transition_request = ""
-parameters/static_crouching/current_index = 0
+parameters/static_crouching/current_index = 1
 
 [node name="CrouchShapeCast2D" type="ShapeCast2D" parent="."]
 visible = false
@@ -533,9 +539,7 @@ position = Vector2(0, -43)
 offset = Vector2(0, 6)
 position_smoothing_enabled = true
 
-[node name="Effects" type="Node2D" parent="."]
-
-[node name="jumpParticles" type="CPUParticles2D" parent="Effects"]
+[node name="JumpParticles" type="CPUParticles2D" parent="."]
 z_index = 999
 y_sort_enabled = true
 material = SubResource("CanvasItemMaterial_gruwm")

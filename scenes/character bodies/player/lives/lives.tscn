@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cccrv3thxjg41"]
+
+[ext_resource type="Script" path="res://scenes/character bodies/player/lives/lives.gd" id="1_hymic"]
+[ext_resource type="Texture2D" uid="uid://dfdw01q46aajh" path="res://scenes/character bodies/player/lives/hearts.png" id="2_uxnit"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_hymic")
+
+[node name="hearts" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(5, 5)
+texture = ExtResource("2_uxnit")
+hframes = 2

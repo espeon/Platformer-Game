@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var cshape = $CollisionShape2D
 @onready var sprite = $AnimatedSprite2D
 @onready var anim = $AnimationTree
-@onready var jumpParticles = $Effects/jumpParticles
+@onready var jump_particles = $JumpParticles
 
 var speed = main_speed
 var jump_num = max_jumps
@@ -100,9 +100,9 @@ func _physics_process(delta):
 		$Jump.play()
 		velocity.y = -jump_velocity
 		jump_num -= 1
-		jumpParticles.angle_max = 0 + 20
-		jumpParticles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
-		jumpParticles.emitting = 0 - 20
+		jump_particles.angle_max = 0 + 20
+		jump_particles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
+		jump_particles.emitting = 0 - 20
 	
 
 	
