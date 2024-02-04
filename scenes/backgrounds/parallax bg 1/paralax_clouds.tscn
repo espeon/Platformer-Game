@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfuk0f80uair1"]
+
+[ext_resource type="Texture2D" uid="uid://b46y3f5j5fnpr" path="res://scenes/backgrounds/textures/CloudsBack.png" id="1_epp2i"]
+[ext_resource type="Script" path="res://scenes/backgrounds/parallax bg 1/paralax_clouds.gd" id="1_yxd32"]
+[ext_resource type="Texture2D" uid="uid://cj1mxx0pfvglc" path="res://scenes/backgrounds/textures/CloudsFront.png" id="2_2h4hr"]
+
+[node name="ParalaxClouds1" type="ParallaxBackground"]
+offset = Vector2(64, 64)
+transform = Transform2D(1, 0, 0, 1, 64, 64)
+script = ExtResource("1_yxd32")
+
+[node name="CloudsBack" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsBack"]
+texture_filter = 1
+texture = ExtResource("1_epp2i")
+
+[node name="CloudsFront" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsFront"]
+texture_filter = 1
+texture = ExtResource("2_2h4hr")
