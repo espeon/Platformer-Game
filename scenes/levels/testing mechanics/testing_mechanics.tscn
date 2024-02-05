@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cs2ynknivuqov"]
 
 [ext_resource type="PackedScene" uid="uid://cw1dm3jv5cq12" path="res://scenes/levels/testing mechanics/tilemap/tile_map.tscn" id="1_rpmpf"]
-[ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/character bodies/player/player.tscn" id="2_g27us"]
+[ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/character bodies/player/Player.tscn" id="2_g27us"]
 [ext_resource type="PackedScene" uid="uid://dfuk0f80uair1" path="res://scenes/backgrounds/parallax bg 1/paralax_clouds.tscn" id="3_4vhrx"]
 [ext_resource type="PackedScene" uid="uid://c1s8mftritkeq" path="res://scenes/backgrounds/parallax bg 2/paralax_mountains.tscn" id="3_b2hi8"]
 
@@ -16,3 +16,5 @@ position = Vector2(160, 105)
 [node name="ParalaxClouds" parent="." instance=ExtResource("3_4vhrx")]
 
 [node name="ParalaxMountains" parent="." instance=ExtResource("3_b2hi8")]
+offset = Vector2(64, 40)
+transform = Transform2D(1, 0, 0, 1, 64, 40)

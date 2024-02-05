@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dtailjcixm7s4"
-path="res://.godot/imported/player_walk.wav-a768e9bab1e08365824e29adbae2d8bc.sample"
+path="res://.godot/imported/player_walk.wav-db97a3a142d8be9ad4040c75b72e12bc.sample"
 
 [deps]
 
-source_file="res://scenes/character bodies/player/player_walk.wav"
-dest_files=["res://.godot/imported/player_walk.wav-a768e9bab1e08365824e29adbae2d8bc.sample"]
+source_file="res://scenes/character bodies/player/assets/player_walk.wav"
+dest_files=["res://.godot/imported/player_walk.wav-db97a3a142d8be9ad4040c75b72e12bc.sample"]
 
 [params]
 

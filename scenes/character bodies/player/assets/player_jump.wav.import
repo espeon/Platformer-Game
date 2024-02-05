@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bpytbyox4lhnb"
-path="res://.godot/imported/player_jump.wav-9b11bee512d1a303540f5aff19a8e83d.sample"
+path="res://.godot/imported/player_jump.wav-aa3df2d723eb42e775b4c7c247c4dbe3.sample"
 
 [deps]
 
-source_file="res://scenes/character bodies/player/player_jump.wav"
-dest_files=["res://.godot/imported/player_jump.wav-9b11bee512d1a303540f5aff19a8e83d.sample"]
+source_file="res://scenes/character bodies/player/assets/player_jump.wav"
+dest_files=["res://.godot/imported/player_jump.wav-aa3df2d723eb42e775b4c7c247c4dbe3.sample"]
 
 [params]
 

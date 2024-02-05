@@ -1,18 +1,18 @@
-[gd_scene load_steps=45 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=43 format=3 uid="uid://b0iwhan3emqtq"]
 
-[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/character bodies/player/player_frames.tres" id="1_fgoj4"]
+[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/character bodies/player/assets/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/character bodies/player/player.gd" id="1_lsbkp"]
 [ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/character bodies/player/lives/lives.tscn" id="2_73gsv"]
+[ext_resource type="PackedScene" uid="uid://b31s6qorjobrg" path="res://scenes/character bodies/player/jump_particles/jump_particles.tscn" id="3_2w600"]
 [ext_resource type="PackedScene" uid="uid://dp2uxssvjxdax" path="res://scenes/character bodies/player/state machine/player_state_machine.tscn" id="3_fgvg1"]
-[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/character bodies/player/CrouchCollisionShape.tres" id="3_ruosv"]
-[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/character bodies/player/StandingCollisionShape.tres" id="4_ces4e"]
-[ext_resource type="Texture2D" uid="uid://dnqlvxmt0dss3" path="res://scenes/character bodies/player/particle.png" id="5_38dyt"]
-[ext_resource type="AudioStream" uid="uid://bpytbyox4lhnb" path="res://scenes/character bodies/player/player_jump.wav" id="6_4sasn"]
-[ext_resource type="AudioStream" uid="uid://ctmodooxl41e7" path="res://scenes/character bodies/player/player_land.wav" id="7_kn8ww"]
-[ext_resource type="AudioStream" uid="uid://dtailjcixm7s4" path="res://scenes/character bodies/player/player_walk.wav" id="8_3148h"]
-[ext_resource type="AudioStream" uid="uid://c0bf5p55n48f" path="res://scenes/character bodies/player/player_death.mp3" id="10_365ue"]
-[ext_resource type="AudioStream" uid="uid://di0s57pyfs6mn" path="res://scenes/character bodies/player/fanfare_endpoint.wav" id="11_k6uif"]
-[ext_resource type="AudioStream" uid="uid://c812gqov4e1r8" path="res://scenes/character bodies/player/player_hurt.mp3" id="11_v5i1e"]
+[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/character bodies/player/assets/CrouchCollisionShape.tres" id="3_ruosv"]
+[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/character bodies/player/assets/StandingCollisionShape.tres" id="4_ces4e"]
+[ext_resource type="AudioStream" uid="uid://bpytbyox4lhnb" path="res://scenes/character bodies/player/assets/player_jump.wav" id="6_4sasn"]
+[ext_resource type="AudioStream" uid="uid://ctmodooxl41e7" path="res://scenes/character bodies/player/assets/player_land.wav" id="7_kn8ww"]
+[ext_resource type="AudioStream" uid="uid://dtailjcixm7s4" path="res://scenes/character bodies/player/assets/player_walk.wav" id="8_3148h"]
+[ext_resource type="AudioStream" uid="uid://c0bf5p55n48f" path="res://scenes/character bodies/player/assets/player_death.mp3" id="10_365ue"]
+[ext_resource type="AudioStream" uid="uid://di0s57pyfs6mn" path="res://scenes/character bodies/player/assets/fanfare_endpoint.wav" id="11_k6uif"]
+[ext_resource type="AudioStream" uid="uid://c812gqov4e1r8" path="res://scenes/character bodies/player/assets/player_hurt.mp3" id="11_v5i1e"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -466,15 +466,6 @@ nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
 nodes/static_crouching/position = Vector2(-180, -40)
 node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"is_alive", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"movement", &"is_alive", 1, &"hurt", &"is_alive", 2, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"idle", &"static_crouching", 1, &"crouching"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="Gradient_qgi5t"]
-colors = PackedColorArray(0.880983, 0.956011, 0.815313, 0.976471, 0.476978, 0.642161, 0.529121, 0)
-
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(160, 105.5)
 scale = Vector2(0.5, 0.5)
@@ -485,6 +476,8 @@ ice_drag = 3
 metadata/player = false
 
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
+
+[node name="JumpParticles" parent="." instance=ExtResource("3_2w600")]
 
 [node name="PlayerStateMachine" parent="." instance=ExtResource("3_fgvg1")]
 
@@ -538,32 +531,6 @@ shape = ExtResource("4_ces4e")
 position = Vector2(0, -43)
 offset = Vector2(0, 6)
 position_smoothing_enabled = true
-
-[node name="JumpParticles" type="CPUParticles2D" parent="."]
-z_index = 999
-y_sort_enabled = true
-material = SubResource("CanvasItemMaterial_gruwm")
-position = Vector2(0, -3)
-emitting = false
-amount = 32
-lifetime = 0.7
-one_shot = true
-explosiveness = 1.0
-randomness = 0.12
-texture = ExtResource("5_38dyt")
-emission_shape = 2
-emission_sphere_radius = 3.93
-direction = Vector2(1, 2.08165e-12)
-spread = 97.61
-gravity = Vector2(2.08165e-12, 980)
-damping_min = 13.732
-damping_max = 25.352
-angle_min = -172.4
-angle_max = 45.6
-scale_amount_min = 0.4
-color_ramp = SubResource("Gradient_qgi5t")
-anim_speed_min = 29.3
-anim_speed_max = 29.3
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_4sasn")

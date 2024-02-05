@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dlbxlm6wab7od"
-path="res://.godot/imported/fanfare_checkpoint.wav-71fdfcf38483b307750fda9a943f66e4.sample"
+path="res://.godot/imported/fanfare_checkpoint.wav-f616e5b43f18018339bb2d62818f0808.sample"
 
 [deps]
 
-source_file="res://scenes/character bodies/player/fanfare_checkpoint.wav"
-dest_files=["res://.godot/imported/fanfare_checkpoint.wav-71fdfcf38483b307750fda9a943f66e4.sample"]
+source_file="res://scenes/character bodies/player/assets/fanfare_checkpoint.wav"
+dest_files=["res://.godot/imported/fanfare_checkpoint.wav-f616e5b43f18018339bb2d62818f0808.sample"]
 
 [params]
 

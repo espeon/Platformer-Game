@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://di0s57pyfs6mn"
-path="res://.godot/imported/fanfare_endpoint.wav-ae85c861038e6651564812c527c05643.sample"
+path="res://.godot/imported/fanfare_endpoint.wav-fc8b1255177d68bf6d32b84a704c46d2.sample"
 
 [deps]
 
-source_file="res://scenes/character bodies/player/fanfare_endpoint.wav"
-dest_files=["res://.godot/imported/fanfare_endpoint.wav-ae85c861038e6651564812c527c05643.sample"]
+source_file="res://scenes/character bodies/player/assets/fanfare_endpoint.wav"
+dest_files=["res://.godot/imported/fanfare_endpoint.wav-fc8b1255177d68bf6d32b84a704c46d2.sample"]
 
 [params]
 

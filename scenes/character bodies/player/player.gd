@@ -15,6 +15,8 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var anim = $AnimationTree
 @onready var jump_particles = $JumpParticles
+@onready var standing_cshape = preload("res://scenes/character bodies/player/assets/StandingCollisionShape.tres")
+@onready var crouching_cshape = preload("res://scenes/character bodies/player/assets/CrouchCollisionShape.tres")
 
 var speed = main_speed
 var jump_num = max_jumps
@@ -25,8 +27,6 @@ var can_move = true
 var stuck_under_object = false
 signal win_signal
 
-var standing_cshape = preload("res://scenes/character bodies/player/StandingCollisionShape.tres")
-var crouching_cshape = preload("res://scenes/character bodies/player/CrouchCollisionShape.tres")
 
 
 #this happens onece when load into the screen
@@ -102,9 +102,9 @@ func _physics_process(delta):
 		jump_num -= 1
 		jump_particles.angle_max = 0 + 20
 		jump_particles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
-		jump_particles.emitting = 0 - 20
+		jump_particles.emitting = 1
 	
-
+	
 	
 	#horixontal movement mechanics
 	#horizontal direction is between -1 and 1 both or neither is 0

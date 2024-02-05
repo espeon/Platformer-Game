@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ctmodooxl41e7"
-path="res://.godot/imported/player_land.wav-9ae9d63e8cec87e1beec5973318687f3.sample"
+path="res://.godot/imported/player_land.wav-9d382c1db9cc76cc8143dc4016eb195d.sample"
 
 [deps]
 
-source_file="res://scenes/character bodies/player/player_land.wav"
-dest_files=["res://.godot/imported/player_land.wav-9ae9d63e8cec87e1beec5973318687f3.sample"]
+source_file="res://scenes/character bodies/player/assets/player_land.wav"
+dest_files=["res://.godot/imported/player_land.wav-9d382c1db9cc76cc8143dc4016eb195d.sample"]
 
 [params]
 
