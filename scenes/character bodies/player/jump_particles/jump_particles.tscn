@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b31s6qorjobrg"]
 
-[ext_resource type="Material" uid="uid://b3r6yq3ctvxfb" path="res://scenes/character bodies/player/jump_particles/jump_particles.tres" id="1_n1ytc"]
-[ext_resource type="Texture2D" uid="uid://dnqlvxmt0dss3" path="res://scenes/character bodies/player/jump_particles/particle.png" id="2_vjjvr"]
+[ext_resource type="Material" uid="uid://b3r6yq3ctvxfb" path="res://assets/materials/jump_particles.tres" id="1_n1ytc"]
+[ext_resource type="Texture2D" uid="uid://dnqlvxmt0dss3" path="res://assets/textures/shared/particle.png" id="2_vjjvr"]
 
 [sub_resource type="Gradient" id="Gradient_vld01"]
 colors = PackedColorArray(0.917441, 0.922724, 0.754218, 1, 1, 1, 1, 0)

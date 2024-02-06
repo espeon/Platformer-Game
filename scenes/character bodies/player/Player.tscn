@@ -1,18 +1,18 @@
 [gd_scene load_steps=43 format=3 uid="uid://b0iwhan3emqtq"]
 
-[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/character bodies/player/assets/player_frames.tres" id="1_fgoj4"]
-[ext_resource type="Script" path="res://scenes/character bodies/player/player.gd" id="1_lsbkp"]
+[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://assets/textures/player/player_frames.tres" id="1_fgoj4"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_lsbkp"]
 [ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/character bodies/player/lives/lives.tscn" id="2_73gsv"]
 [ext_resource type="PackedScene" uid="uid://b31s6qorjobrg" path="res://scenes/character bodies/player/jump_particles/jump_particles.tscn" id="3_2w600"]
 [ext_resource type="PackedScene" uid="uid://dp2uxssvjxdax" path="res://scenes/character bodies/player/state machine/player_state_machine.tscn" id="3_fgvg1"]
-[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/character bodies/player/assets/CrouchCollisionShape.tres" id="3_ruosv"]
-[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/character bodies/player/assets/StandingCollisionShape.tres" id="4_ces4e"]
-[ext_resource type="AudioStream" uid="uid://bpytbyox4lhnb" path="res://scenes/character bodies/player/assets/player_jump.wav" id="6_4sasn"]
-[ext_resource type="AudioStream" uid="uid://ctmodooxl41e7" path="res://scenes/character bodies/player/assets/player_land.wav" id="7_kn8ww"]
-[ext_resource type="AudioStream" uid="uid://dtailjcixm7s4" path="res://scenes/character bodies/player/assets/player_walk.wav" id="8_3148h"]
-[ext_resource type="AudioStream" uid="uid://c0bf5p55n48f" path="res://scenes/character bodies/player/assets/player_death.mp3" id="10_365ue"]
-[ext_resource type="AudioStream" uid="uid://di0s57pyfs6mn" path="res://scenes/character bodies/player/assets/fanfare_endpoint.wav" id="11_k6uif"]
-[ext_resource type="AudioStream" uid="uid://c812gqov4e1r8" path="res://scenes/character bodies/player/assets/player_hurt.mp3" id="11_v5i1e"]
+[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://assets/collision shapes/player/CrouchCollisionShape.tres" id="3_ruosv"]
+[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://assets/collision shapes/player/StandingCollisionShape.tres" id="4_ces4e"]
+[ext_resource type="AudioStream" uid="uid://bpytbyox4lhnb" path="res://assets/sounds/player/player_jump.wav" id="6_4sasn"]
+[ext_resource type="AudioStream" uid="uid://ctmodooxl41e7" path="res://assets/sounds/player/player_land.wav" id="7_kn8ww"]
+[ext_resource type="AudioStream" uid="uid://dtailjcixm7s4" path="res://assets/sounds/player/player_walk.wav" id="8_3148h"]
+[ext_resource type="AudioStream" uid="uid://c0bf5p55n48f" path="res://assets/sounds/player/player_death.mp3" id="10_365ue"]
+[ext_resource type="AudioStream" uid="uid://di0s57pyfs6mn" path="res://assets/sounds/player/endpoint.wav" id="11_k6uif"]
+[ext_resource type="AudioStream" uid="uid://c812gqov4e1r8" path="res://assets/sounds/player/player_hurt.mp3" id="11_v5i1e"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -545,6 +545,11 @@ stream = ExtResource("8_3148h")
 volume_db = -10.576
 pitch_scale = 1.3
 
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_365ue")
+volume_db = -10.5
+pitch_scale = 1.3
+
 [node name="FallDeath" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_365ue")
 volume_db = -10.576
@@ -552,11 +557,6 @@ pitch_scale = 1.3
 
 [node name="Hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_v5i1e")
-volume_db = -10.5
-pitch_scale = 1.3
-
-[node name="Death" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_365ue")
 volume_db = -10.5
 pitch_scale = 1.3
 
