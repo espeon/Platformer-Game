@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5chuhli0is6b"]
-
-[ext_resource type="Script" path="res://scenes/character bodies/basic states/state.gd" id="1_q26vc"]
-
-[node name="BasicState" type="Node2D"]
-script = ExtResource("1_q26vc")

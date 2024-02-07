@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cccrv3thxjg41"]
 
-[ext_resource type="Script" path="res://scripts/lives.gd" id="1_hymic"]
+[ext_resource type="Script" path="res://scripts/player/lives.gd" id="1_hymic"]
 [ext_resource type="Texture2D" uid="uid://dfdw01q46aajh" path="res://assets/textures/player/hearts.png" id="2_uxnit"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
