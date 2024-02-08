@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://ji1m2kyfd85w"]
+[gd_scene load_steps=2 format=3 uid="uid://ji1m2kyfd85w"]
+
+[ext_resource type="Script" path="res://scenes/character bodies/enemies/skeleton/Skeleton.gd" id="1_x10ks"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_x10ks")
