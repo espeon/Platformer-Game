@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw1dm3jv5cq12"]
+
+[ext_resource type="TileSet" uid="uid://bmcy4j0plfs8j" path="res://assets/textures/levels/default_tileset.tres" id="1_bu8vk"]
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource("1_bu8vk")
+format = 2
+layer_0/name = "BDecorations"
+layer_0/z_index = -1
+layer_1/name = "Spikes"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Ground"
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Grass"
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "F2Decorations"
+layer_4/z_index = 2
+layer_4/tile_data = PackedInt32Array()
+layer_5/name = "F1Decorations"
+layer_5/z_index = 3
+layer_5/tile_data = PackedInt32Array()

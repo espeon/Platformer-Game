@@ -1,19 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=38 format=3 uid="uid://b0iwhan3emqtq"]
 
-[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://assets/textures/player/player_frames.tres" id="1_fgoj4"]
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_lsbkp"]
-[ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/character bodies/player/lives/lives.tscn" id="2_73gsv"]
-[ext_resource type="Script" path="res://scripts/state.gd" id="2_dxph1"]
-[ext_resource type="PackedScene" uid="uid://b31s6qorjobrg" path="res://scenes/character bodies/player/jump_particles/jump_particles.tscn" id="3_2w600"]
-[ext_resource type="Script" path="res://scripts/player/state machine/Idle.gd" id="3_17c31"]
-[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://assets/collision shapes/player/CrouchCollisionShape.tres" id="3_ruosv"]
-[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://assets/collision shapes/player/StandingCollisionShape.tres" id="4_ces4e"]
-[ext_resource type="AudioStream" uid="uid://bpytbyox4lhnb" path="res://assets/sounds/player/player_jump.wav" id="6_4sasn"]
-[ext_resource type="AudioStream" uid="uid://ctmodooxl41e7" path="res://assets/sounds/player/player_land.wav" id="7_kn8ww"]
-[ext_resource type="AudioStream" uid="uid://dtailjcixm7s4" path="res://assets/sounds/player/player_walk.wav" id="8_3148h"]
-[ext_resource type="AudioStream" uid="uid://c0bf5p55n48f" path="res://assets/sounds/player/player_death.mp3" id="10_365ue"]
-[ext_resource type="AudioStream" uid="uid://di0s57pyfs6mn" path="res://assets/sounds/player/endpoint.wav" id="11_k6uif"]
-[ext_resource type="AudioStream" uid="uid://c812gqov4e1r8" path="res://assets/sounds/player/player_hurt.mp3" id="11_v5i1e"]
+[ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
+[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
+[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
+[ext_resource type="Texture2D" uid="uid://c6vbh6pla1oyt" path="res://assets/textures/other/particle.png" id="5_38dyt"]
+[ext_resource type="AudioStream" uid="uid://bl0hbs6jveou8" path="res://assets/audio/player_jump.wav" id="6_4sasn"]
+[ext_resource type="AudioStream" uid="uid://bp6m3irils5hj" path="res://assets/audio/player_land.wav" id="7_kn8ww"]
+[ext_resource type="AudioStream" uid="uid://crp0w6o2ut783" path="res://assets/audio/player_walk.wav" id="8_3148h"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -165,20 +159,6 @@ tracks/1/keys = {
 "update": 1,
 "values": ["death"]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"respawn"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_obu3c"]
 length = 0.333333
@@ -206,47 +186,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["falling"]
-}
-
-[sub_resource type="Animation" id="Animation_olx0v"]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["hurt"]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"check_life"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_ymrfi"]
@@ -351,7 +290,6 @@ _data = {
 "crouch (idle)": SubResource("Animation_xrvid"),
 "death": SubResource("Animation_tfh2v"),
 "falling": SubResource("Animation_obu3c"),
-"hurt": SubResource("Animation_olx0v"),
 "idle": SubResource("Animation_ymrfi"),
 "jump": SubResource("Animation_bvq0f"),
 "run": SubResource("Animation_wr3qp")
@@ -374,9 +312,6 @@ animation = &"crouch (idle)"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elch2"]
 animation = &"death"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2n7vc"]
-animation = &"hurt"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixa2u"]
 animation = &"idle"
 
@@ -392,12 +327,9 @@ input_1/reset = true
 input_0/name = "alive"
 input_0/auto_advance = false
 input_0/reset = true
-input_1/name = "hurt"
+input_1/name = "dead"
 input_1/auto_advance = false
 input_1/reset = true
-input_2/name = "dead"
-input_2/auto_advance = false
-input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rpot6"]
 animation = &"falling"
@@ -439,57 +371,49 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-225.383, -57.2897)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
-nodes/air_crouch/position = Vector2(240, 500)
+nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
-"nodes/crouch 2/position" = Vector2(60, 500)
+"nodes/crouch 2/position" = Vector2(60, 340)
 nodes/crouching/node = SubResource("AnimationNodeAnimation_wc61a")
-nodes/crouching/position = Vector2(-340, 120)
+nodes/crouching/position = Vector2(-320, 180)
 nodes/death/node = SubResource("AnimationNodeAnimation_elch2")
-nodes/death/position = Vector2(60, 340)
-nodes/hurt/node = SubResource("AnimationNodeAnimation_2n7vc")
-nodes/hurt/position = Vector2(60, 200)
+nodes/death/position = Vector2(-560, 40)
 nodes/idle/node = SubResource("AnimationNodeAnimation_ixa2u")
-nodes/idle/position = Vector2(-320, -60)
+nodes/idle/position = Vector2(-560, -100)
 nodes/in_air_state/node = SubResource("AnimationNodeTransition_v13v0")
-nodes/in_air_state/position = Vector2(420, 380)
+nodes/in_air_state/position = Vector2(420, 240)
 nodes/is_alive/node = SubResource("AnimationNodeTransition_520ir")
-nodes/is_alive/position = Vector2(240, 120)
+nodes/is_alive/position = Vector2(-320, -100)
 nodes/jump/node = SubResource("AnimationNodeStateMachine_vf8js")
-nodes/jump/position = Vector2(40, 640)
+nodes/jump/position = Vector2(40, 520)
 nodes/movement/node = SubResource("AnimationNodeTransition_scxjp")
-nodes/movement/position = Vector2(60, 0)
-nodes/output/position = Vector2(620, 380)
+nodes/movement/position = Vector2(220, 120)
+nodes/output/position = Vector2(620, 280)
 nodes/run/node = SubResource("AnimationNodeAnimation_qpqge")
 nodes/run/position = Vector2(-320, 320)
 nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
-nodes/static_crouching/position = Vector2(-180, -40)
-node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"is_alive", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"movement", &"is_alive", 1, &"hurt", &"is_alive", 2, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"idle", &"static_crouching", 1, &"crouching"]
+nodes/static_crouching/position = Vector2(-100, 20)
+node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"is_alive", &"static_crouching", 1, &"crouching"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_qgi5t"]
+colors = PackedColorArray(0.880983, 0.956011, 0.815313, 0.976471, 0.476978, 0.642161, 0.529121, 0)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(160, 105.5)
 scale = Vector2(0.5, 0.5)
-collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_lsbkp")
 metadata/player = false
-
-[node name="State" type="Node" parent="."]
-script = ExtResource("2_dxph1")
-
-[node name="Idle" type="Node" parent="State"]
-script = ExtResource("3_17c31")
-
-[node name="Lives" parent="." instance=ExtResource("2_73gsv")]
-
-[node name="JumpParticles" parent="." instance=ExtResource("3_2w600")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"idle"
-frame = 3
+animation = &"falling"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -505,9 +429,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/air_crouch/current_state = "air"
 parameters/air_crouch/transition_request = ""
 parameters/air_crouch/current_index = 1
-parameters/in_air_state/current_state = "ground"
+parameters/in_air_state/current_state = "air"
 parameters/in_air_state/transition_request = ""
-parameters/in_air_state/current_index = 0
+parameters/in_air_state/current_index = 1
 parameters/is_alive/current_state = "alive"
 parameters/is_alive/transition_request = ""
 parameters/is_alive/current_index = 0
@@ -526,7 +450,6 @@ target_position = Vector2(0, 0)
 max_results = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -15)
 shape = ExtResource("4_ces4e")
 
@@ -535,35 +458,39 @@ position = Vector2(0, -43)
 offset = Vector2(0, 6)
 position_smoothing_enabled = true
 
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="jumpParticles" type="CPUParticles2D" parent="Effects"]
+z_index = 999
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_gruwm")
+position = Vector2(0, -3)
+emitting = false
+amount = 32
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 0.12
+texture = ExtResource("5_38dyt")
+emission_shape = 2
+emission_sphere_radius = 3.93
+direction = Vector2(1, 2.08165e-12)
+spread = 97.61
+gravity = Vector2(2.08165e-12, 980)
+damping_min = 13.732
+damping_max = 25.352
+angle_min = -172.4
+angle_max = 45.6
+scale_amount_min = 0.4
+color_ramp = SubResource("Gradient_qgi5t")
+anim_speed_min = 29.3
+anim_speed_max = 29.3
+
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_4sasn")
-volume_db = -10.576
 
 [node name="Land" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_kn8ww")
-volume_db = -9.989
 
 [node name="Walk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3148h")
-volume_db = -10.576
-pitch_scale = 1.3
-
-[node name="Death" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_365ue")
-volume_db = -10.5
-pitch_scale = 1.3
-
-[node name="FallDeath" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_365ue")
-volume_db = -10.576
-pitch_scale = 1.3
-
-[node name="Hurt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_v5i1e")
-volume_db = -10.5
-pitch_scale = 1.3
-
-[node name="Win" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_k6uif")
-volume_db = 10.0
-pitch_scale = 1.5

@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://ji1m2kyfd85w"]
+[gd_scene load_steps=4 format=3 uid="uid://ji1m2kyfd85w"]
+
+[ext_resource type="Script" path="res://scripts/skeleton/Skeleton.gd" id="1_x10ks"]
+[ext_resource type="Script" path="res://scripts/skeleton/state machine/skeleton_state_machine.gd" id="2_sxfd5"]
+[ext_resource type="Script" path="res://scripts/skeleton/state machine/skeleton_state.gd" id="3_lh36o"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_x10ks")
+
+[node name="SkeletonStateMachine" type="Node" parent="."]
+script = ExtResource("2_sxfd5")
+
+[node name="SkeletonState" type="Node" parent="SkeletonStateMachine"]
+script = ExtResource("3_lh36o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
