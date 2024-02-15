@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgrkhmjf3p3qv"]
+
+[ext_resource type="Script" path="res://scripts/minimap.gd" id="1_t8h2l"]
+
+[node name="Minimap" type="CanvasLayer"]
+script = ExtResource("1_t8h2l")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_top = 10.0
+offset_right = 512.0
+offset_bottom = 260.0
+scale = Vector2(0.04, 0.04)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+offset = Vector2(2.08165e-12, -20)
