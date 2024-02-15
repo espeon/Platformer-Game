@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://ut4hxqgw3iys"]
+[gd_scene load_steps=3 format=3 uid="uid://ut4hxqgw3iys"]
+
+[ext_resource type="Script" path="res://scenes/levels/level 1/Level1.gd" id="1_wmrg7"]
+[ext_resource type="PackedScene" uid="uid://lehvkjwy63ww" path="res://scenes/menus/pause_menu.tscn" id="2_6flue"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_wmrg7")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_6flue")]
+visible = false
+offset_left = 157.0
+offset_top = 88.0
+offset_right = 157.0
+offset_bottom = 88.0
+pivot_offset = Vector2(-59, -58)
