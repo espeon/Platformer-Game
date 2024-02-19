@@ -2,12 +2,14 @@ class_name Skeleton
 extends CharacterBody2D
 
 @export var main_speed: float = 30
+@export var chase_speed: float = 40
 @export var terminal_velocity: float = 300
 @export var main_drag: float = 10
 @export var gravity: float = 10
 @export var jump_velocity: float = 200
 @export var start_position: Vector2 = Vector2(160, 50)
 @export var is_walker = true
+@export var direction: float = -1
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var anim: AnimationTree = $AnimationTree
@@ -25,4 +27,3 @@ func _process(delta) -> void:
 
 func _physics_process(delta):
 	pass
-	move_and_slide()
