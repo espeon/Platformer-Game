@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b77g0ptpjdp3i"]
-
-[ext_resource type="Script" path="res://scripts/skeleton/state machine/skeleton_state_machine.gd" id="1_1643u"]
-
-[node name="SkeletonStateMachine" type="Node2D"]
-script = ExtResource("1_1643u")
