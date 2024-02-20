@@ -1,4 +1,4 @@
-class_name Player
+class_name PlayerOriginal
 extends CharacterBody2D 
 
 @export var main_speed: float = 30
@@ -135,6 +135,23 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 	update_animations(horizontal_direction)
 
+#updates the boolean and collision shape when crouching
+func crouch() -> void:
+	if !is_crouching:
+		is_crouching = true
+		speed = 0 #set velocity to 0
+		cshape.shape = crouching_cshape
+		cshape.position.y = -10.5
+
+
+#updates the boolean and collision shape when standing
+func stand() -> void:
+	if is_crouching:
+		is_crouching = false
+		anim.set("crouch_walk_time", 1) #set the animation speed to normal
+		speed = main_speed #set speed to normal
+		cshape.shape = standing_cshape
+		cshape.position.y = -15
 
 #uses the shapecast to return true if there is nothing on top
 func above_head_is_empty() -> bool:
@@ -171,23 +188,6 @@ func switch_direction(horizontal_direction) -> void:
 	sprite.flip_h = (horizontal_direction < 0) #uses horizontal direction to become a boolean
 
 
-#updates the boolean and collision shape when crouching
-func crouch() -> void:
-	if !is_crouching:
-		is_crouching = true
-		speed = 0 #set velocity to 0
-		cshape.shape = crouching_cshape
-		cshape.position.y = -10.5
-
-
-#updates the boolean and collision shape when standing
-func stand() -> void:
-	if is_crouching:
-		is_crouching = false
-		anim.set("crouch_walk_time", 1) #set the animation speed to normal
-		speed = main_speed #set speed to normal
-		cshape.shape = standing_cshape
-		cshape.position.y = -15
 
 
 func _on_skeleton_hurt_player() -> void:
