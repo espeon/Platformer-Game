@@ -17,7 +17,7 @@ func _ready():
 func _process(delta):
 	# find the heart that might not be full.
 	#print(player.lives)
-	var last_heart = floor(player.lives)
+	var last_heart = floor(player.cur_lives)
 
 	
 	for heart in $hearts.get_children():
