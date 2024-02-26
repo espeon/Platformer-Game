@@ -1,5 +1,6 @@
 class_name Player
 extends CharacterBody2D
+#get_tree().quit()
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -13,16 +14,20 @@ extends CharacterBody2D
 @export var max_jump_num: int = 2
 @export var max_speed: Vector2 = Vector2(300.0, 300.0)
 @export var max_crouch_walk_speed: float = 100.0
-@export var max_jump_speed: float = 200.0
 @export var x_acceleration: float = 3.0
-@export var gravity: float = 10.0
+
+@export var jump_height : float = 40
+@export var jump_time_to_peak : float = 0.4
+@export var jump_time_to_descent : float = 0.4
 
 var horizontal_direction: float = 0
 var jump_num: int = max_jump_num
 var cur_lives: int = max_lives
 var can_move: bool = true
 var is_attack_combo: bool = false
-var is_jumping: bool = false
+var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
+var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 
 enum states {IDLE, RUNNING, CROUCHING, CROUCH_WALK, ROLLING, JUMP, FALL, ATTACK1, ATTACK2, ATTACK3, DEATH, HURT}
@@ -45,39 +50,44 @@ var cur_state = states.IDLE
 
 func _process(delta):
 	#print(cur_state)
-	print(cur_state, " ", velocity.y, " ", max_jump_speed)
+	print(cur_state, " ", velocity.y, " ")
 	horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
-	if velocity.y!=0 && !is_jumping:
+	if !is_on_floor() && velocity.y>=0:				#falling logic universal
 		cur_state = states.FALL
 	
 	
 
 func _physics_process(delta):
-	if !is_on_floor() && !is_jumping:
-		velocity.y = lerp(velocity.y, max_speed.y, gravity*delta)
-	
 	state_functions[cur_state].call(delta)
 	move_and_slide()
 	
+
+func get_gravity() -> float:
+	if velocity.y<0:
+		return jump_gravity
+	else:
+		return fall_gravity
+
+func move(delta) -> void:
+	velocity.x = lerp(velocity.x, max_speed.x*horizontal_direction, x_acceleration*delta)
+	sprite.flip_h = (horizontal_direction < 0)
 
 
 #need finish
 func idle_function(delta) -> void: 
 	#go to conditions
-	if horizontal_direction!=0:						#running
+	if horizontal_direction!=0:									#running
 		cur_state = states.RUNNING
-	elif Input.is_action_just_pressed("roll"):		#rolling
+	elif Input.is_action_just_pressed("roll"):					#rolling
 		cur_state = states.ROLLING
-	elif Input.is_action_just_pressed("crouch"):	#crouching
+	elif Input.is_action_just_pressed("crouch"):				#crouching
 		cur_state = states.CROUCHING
-	elif Input.is_action_just_pressed("attack"):	#attack1
+	elif Input.is_action_just_pressed("attack"):				#attack1
 		cur_state = states.ATTACK1
 		anim.play("attack1")
-	elif Input.is_action_just_pressed("jump") && jump_num>0:
+	elif Input.is_action_just_pressed("jump") && jump_num>0:	#jumping
 		cur_state = states.JUMP
-		velocity.y = -max_jump_speed
-		anim.play("jump")
-		
+		velocity.y = jump_velocity
 	else:
 		velocity.x = lerp(velocity.x, 0.0, x_acceleration*delta)
 		anim.play("idle")
@@ -86,16 +96,18 @@ func idle_function(delta) -> void:
 #need finish
 func running_function(delta) -> void: 
 	#go to idle
-	if horizontal_direction==0:
+	if horizontal_direction==0:						#idle
 		cur_state = states.IDLE
-	elif Input.is_action_just_pressed("crouch"):
+	elif Input.is_action_just_pressed("crouch"):	#crouch_walk
 		cur_state = states.CROUCH_WALK
 	elif Input.is_action_just_pressed("attack"):	#attack1
 		cur_state = states.ATTACK1
 		anim.play("attack1")
-	elif can_move: #logic for movement
-		velocity.x = lerp(velocity.x, max_speed.x*horizontal_direction, x_acceleration*delta)
-		sprite.flip_h = (horizontal_direction < 0)
+	elif Input.is_action_just_pressed("jump"):		#jump
+		cur_state = states.JUMP
+		velocity.y = jump_velocity
+	elif can_move: 									#logic for movement
+		move(delta)
 		anim.play("run")
 	
 
@@ -113,13 +125,12 @@ func crouching_function(delta) -> void:
 
 #need finish
 func crouch_walking_function(delta) -> void:
-	if horizontal_direction==0:
+	if horizontal_direction==0:						#idle
 		cur_state = states.CROUCHING
-	elif Input.is_action_just_released("crouch"): #above head needs to be added
+	elif Input.is_action_just_released("crouch"): 	#running #above head needs to be added
 		cur_state = states.RUNNING
-	elif can_move: #logic for movement
-		velocity.x = lerp(velocity.x, max_crouch_walk_speed*horizontal_direction, x_acceleration*delta)
-		sprite.flip_h = (horizontal_direction < 0)
+	elif can_move: 									#logic for movement
+		move(delta)
 		anim.play("crouch_walk")
 	
 
@@ -135,23 +146,32 @@ func rolling_function(delta) -> void:
 
 #need finish
 func jump_function(delta) -> void:
-	if !anim.current_animation=="jump":
-		cur_state = states.FALL 
-		is_jumping = false
-		get_tree().quit()
-		
-	else:
-		is_jumping = true
+	if velocity.y>0:														#falling
+		cur_state = states.FALL
+	elif jump_num>0 && Input.is_action_just_pressed("jump"):				#double jump
+		velocity.y = jump_velocity
+	elif Input.is_action_just_pressed("attack"):							#attack1
+		cur_state = states.ATTACK1
+		anim.play("attack1")
+	elif velocity.y<0: 														#jump logic
+		move(delta)
+		velocity.y += get_gravity() * delta
 		anim.play("jump")
-
 
 
 #need finish
 func fall_function(delta) -> void:
-	if velocity.y==0:
+	if is_on_floor():											#idle
 		cur_state = states.IDLE
-	else:
-		velocity.x = lerp(velocity.x, max_speed.x*horizontal_direction, gravity*delta)
+	elif Input.is_action_just_pressed("attack"):				#attack1
+		cur_state = states.ATTACK1
+		anim.play("attack1")
+	elif Input.is_action_just_pressed("jump") && jump_num>0:	#double jump
+		cur_state = states.JUMP
+		velocity.y = jump_velocity
+	elif !is_on_floor():											#falling logic
+		move(delta)
+		velocity.y += get_gravity() * delta
 		anim.play("falling")
 
 
