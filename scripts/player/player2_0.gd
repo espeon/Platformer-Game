@@ -12,13 +12,13 @@ extends CharacterBody2D
 
 @export var max_lives: int = 5
 @export var max_jump_num: int = 2
-@export var max_speed: Vector2 = Vector2(300.0, 300.0)
-@export var max_crouch_walk_speed: float = 100.0
+@export var max_speed: Vector2 = Vector2(200.0, 300.0)
+@export var max_crouch_walk_speed: float = 50.0
 @export var x_acceleration: float = 3.0
 
 @export var jump_height : float = 40
 @export var jump_time_to_peak : float = 0.4
-@export var jump_time_to_descent : float = 0.4
+@export var jump_time_to_descent : float = 0.3
 
 var horizontal_direction: float = 0
 var jump_num: int = max_jump_num
@@ -69,7 +69,10 @@ func get_gravity() -> float:
 		return fall_gravity
 
 func move(delta) -> void:
-	velocity.x = lerp(velocity.x, max_speed.x*horizontal_direction, x_acceleration*delta)
+	if cur_state==states.CROUCH_WALK:
+		velocity.x = lerp(velocity.x, max_crouch_walk_speed*horizontal_direction, x_acceleration*delta)
+	else:
+		velocity.x = lerp(velocity.x, max_speed.x*horizontal_direction, x_acceleration*delta)
 	sprite.flip_h = (horizontal_direction < 0)
 
 
@@ -87,6 +90,7 @@ func idle_function(delta) -> void:
 		anim.play("attack1")
 	elif Input.is_action_just_pressed("jump") && jump_num>0:	#jumping
 		cur_state = states.JUMP
+		jump_num -= 1
 		velocity.y = jump_velocity
 	else:
 		velocity.x = lerp(velocity.x, 0.0, x_acceleration*delta)
@@ -106,6 +110,7 @@ func running_function(delta) -> void:
 	elif Input.is_action_just_pressed("jump"):		#jump
 		cur_state = states.JUMP
 		velocity.y = jump_velocity
+		jump_num -= 1
 	elif can_move: 									#logic for movement
 		move(delta)
 		anim.play("run")
@@ -150,6 +155,7 @@ func jump_function(delta) -> void:
 		cur_state = states.FALL
 	elif jump_num>0 && Input.is_action_just_pressed("jump"):				#double jump
 		velocity.y = jump_velocity
+		jump_num -= 1
 	elif Input.is_action_just_pressed("attack"):							#attack1
 		cur_state = states.ATTACK1
 		anim.play("attack1")
@@ -163,12 +169,14 @@ func jump_function(delta) -> void:
 func fall_function(delta) -> void:
 	if is_on_floor():											#idle
 		cur_state = states.IDLE
+		jump_num = max_jump_num
 	elif Input.is_action_just_pressed("attack"):				#attack1
 		cur_state = states.ATTACK1
 		anim.play("attack1")
 	elif Input.is_action_just_pressed("jump") && jump_num>0:	#double jump
 		cur_state = states.JUMP
 		velocity.y = jump_velocity
+		jump_num -= 1
 	elif !is_on_floor():											#falling logic
 		move(delta)
 		velocity.y += get_gravity() * delta
