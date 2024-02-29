@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ci2qlhp8pa57f"
-path="res://.godot/imported/Skeleton_spot_player.png-d39d44dd47172d4cab4e8b8630a68667.ctex"
+path="res://.godot/imported/Skeleton_spot_player.png-739ee30d37c9b304c083245212910e88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/enemies/skeleton1.0/Skeleton_spot_player.png"
-dest_files=["res://.godot/imported/Skeleton_spot_player.png-d39d44dd47172d4cab4e8b8630a68667.ctex"]
+source_file="res://assets/enemies/skeleton1.0/Skeleton_spot_player.png"
+dest_files=["res://.godot/imported/Skeleton_spot_player.png-739ee30d37c9b304c083245212910e88.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsanxw6on4r32"
-path="res://.godot/imported/Skeleton_damage.png-2933ca6b24e2cf165a6dabf64737cb85.ctex"
+uid="uid://d1n4druoaeqqs"
+path="res://.godot/imported/measuring_background.png-05180fdb26eb2a93055698dd243ea8a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/skeleton1.0/Skeleton_damage.png"
-dest_files=["res://.godot/imported/Skeleton_damage.png-2933ca6b24e2cf165a6dabf64737cb85.ctex"]
+source_file="res://assets/textures/levels/measuring_background.png"
+dest_files=["res://.godot/imported/measuring_background.png-05180fdb26eb2a93055698dd243ea8a3.ctex"]
 
 [params]
 
