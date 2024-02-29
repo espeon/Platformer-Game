@@ -398,7 +398,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_erwmj"]
-length = 0.4
+length = 0.888889
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -406,10 +406,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333, 0.444444, 0.555556, 0.666667, 0.777778),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -548,8 +548,8 @@ script = ExtResource("3_17c31")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"jump"
-frame = 3
+animation = &"slide"
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

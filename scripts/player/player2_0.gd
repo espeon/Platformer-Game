@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 #get_tree().quit()
+var debug: String = "not set"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -13,12 +14,14 @@ var pixel_scale: float = 0.55 #fix the scaling, somehow the pixels are not exacl
 
 @export var max_lives: int = 5
 @export var max_jump_num: int = 2
+@export var initial_position: Vector2 = Vector2(155,128)
 
-var max_speed: Vector2 = Vector2(600.0, 600.0)*pixel_scale
-var max_crouch_walk_speed: float = 100.0*pixel_scale
-var max_roll_speed: float = 600.0*pixel_scale
-var speed_time_to_peak: float = 0.5
-var speed_time_to_stop: float = 0.2
+
+var max_speed: Vector2 = Vector2(250, 600)*pixel_scale
+var max_crouch_walk_speed: float = 100*pixel_scale
+var max_slide_speed: float = 250*pixel_scale
+var speed_to_peak: float = 17*pixel_scale
+var speed_to_stop: float = 20*pixel_scale
 
 
 var horizontal_direction: float = 0
@@ -28,7 +31,7 @@ var can_move: bool = true
 var is_attack_combo: bool = false
 var is_jumping: bool = false
 
-var jump_height : float = 50*pixel_scale
+var jump_height : float = 70*pixel_scale
 var jump_time_to_peak : float = 0.4
 var jump_time_to_descent : float = 0.3
 
@@ -37,13 +40,13 @@ var jump_gravity : float = ((-2.0 * jump_height) / pow(jump_time_to_peak,2)) * -
 var fall_gravity : float = ((-2.0 * jump_height) / pow(jump_time_to_descent,2)) * -1.0
 
 
-enum states {IDLE, RUNNING, CROUCHING, CROUCH_WALK, ROLLING, JUMP, ATTACK1, ATTACK2, ATTACK3, FALL, HURT, DEATH}
+enum states {IDLE, RUNNING, CROUCHING, CROUCH_WALK, SLIDE, JUMP, ATTACK1, ATTACK2, ATTACK3, FALL, HURT, DEATH}
 var state_functions: Dictionary = {
 	states.IDLE : idle_function,
 	states.RUNNING : running_function, 
 	states.CROUCHING : crouching_function,
 	states.CROUCH_WALK : crouch_walking_function,
-	states.ROLLING : rolling_function,
+	states.SLIDE : slide_function,
 	states.JUMP : jump_function, 
 	states.ATTACK1 : attack1_function,
 	states.ATTACK2 : attack2_function,
@@ -56,8 +59,11 @@ var cur_state = states.IDLE
 
 
 func _process(delta):
-	print(cur_state, " ", max_speed.x, " ", velocity.x, " ")
+	print(cur_state, " ", debug, " ", is_jumping, " ", velocity.y, " ")
+	print()
 	horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
+	if position.y>1000:
+		position = initial_position
 	
 
 func _physics_process(delta):
@@ -76,13 +82,15 @@ func get_gravity() -> float:
 
 func move(delta) -> void:
 	if cur_state==states.CROUCH_WALK:
-		velocity.x = move_toward(velocity.x, max_crouch_walk_speed*horizontal_direction, speed_time_to_peak)
+		velocity.x = move_toward(velocity.x, max_crouch_walk_speed*horizontal_direction, speed_to_peak)
 	else:
-		velocity.x = move_toward(velocity.x, max_speed.x*horizontal_direction, speed_time_to_peak)
+		velocity.x = move_toward(velocity.x, max_speed.x*horizontal_direction, speed_to_peak)
+	
 	sprite.flip_h = (horizontal_direction < 0)
+	
 
 func stop(delta) -> void:
-	velocity.x = move_toward(velocity.x, 0.0, speed_time_to_stop)
+	velocity.x = move_toward(velocity.x, 0.0, speed_to_stop)
 
 func get_sprite_direction() -> int:
 	if sprite.flip_h:	#if right returns 1
@@ -92,19 +100,22 @@ func get_sprite_direction() -> int:
 
 func jump(delta):
 	is_jumping = true
+	velocity.y = jump_velocity
 	cur_state = states.JUMP
 	jump_num -= 1
-	velocity.y = jump_velocity
+	if jump_num == max_jump_num:	# Single jump
+		anim.play("jump")
+	else:							# Double jump
+		anim.play("roll")
 
 #need finish
 func idle_function(delta) -> void: 
 	#go to conditions
 	if horizontal_direction!=0:									#running
 		cur_state = states.RUNNING
-	elif Input.is_action_just_pressed("roll"):					#rolling
-		cur_state = states.ROLLING
-		velocity.x = max_roll_speed*get_sprite_direction()
-		anim.play("roll")
+	elif Input.is_action_just_pressed("slide"):					#sliding
+		cur_state = states.SLIDE
+		anim.play("slide")
 	elif Input.is_action_just_pressed("crouch"):				#crouching
 		cur_state = states.CROUCHING
 	elif Input.is_action_just_pressed("jump") && jump_num>0:	#jumping
@@ -124,10 +135,9 @@ func running_function(delta) -> void:
 		cur_state = states.IDLE
 	elif Input.is_action_just_pressed("crouch"):	#crouch_walk
 		cur_state = states.CROUCH_WALK
-	elif Input.is_action_just_pressed("roll"):		#roll
-		cur_state = states.ROLLING
-		velocity.x = max_roll_speed*get_sprite_direction()
-		anim.play("roll")
+	elif Input.is_action_just_pressed("slide"):		#slide
+		cur_state = states.SLIDE
+		anim.play("slide")
 	elif Input.is_action_just_pressed("jump"):		#jump
 		jump(delta)
 	elif Input.is_action_just_pressed("attack"):	#attack1
@@ -145,10 +155,9 @@ func crouching_function(delta) -> void:
 		cur_state = states.IDLE
 	elif horizontal_direction!=0:					#crouch_walk
 		cur_state = states.CROUCH_WALK
-	elif Input.is_action_just_pressed("roll"):		#roll
-		cur_state = states.ROLLING
-		velocity.x = max_roll_speed*get_sprite_direction()
-		anim.play("roll")
+	elif Input.is_action_just_pressed("slide"):		#slide
+		cur_state = states.SLIDE
+		anim.play("slide")
 	elif Input.is_action_just_pressed("jump"):		#jump
 		jump(delta)
 	elif Input.is_action_just_pressed("attack"):	#attack1
@@ -165,10 +174,9 @@ func crouch_walking_function(delta) -> void:
 		cur_state = states.RUNNING
 	elif horizontal_direction==0:					#crouch
 		cur_state = states.CROUCHING
-	elif Input.is_action_just_pressed("roll"):		#roll
-		cur_state = states.ROLLING
-		velocity.x = max_roll_speed*get_sprite_direction()
-		anim.play("roll")
+	elif Input.is_action_just_pressed("slide"):		#slide
+		cur_state = states.SLIDE
+		anim.play("slide")
 	elif Input.is_action_just_pressed("jump"):		#jump
 		jump(delta)
 	elif Input.is_action_just_pressed("attack"):	#attack1
@@ -182,11 +190,12 @@ func crouch_walking_function(delta) -> void:
 
 
 #need finish
-func rolling_function(delta) -> void:
-	if !anim.current_animation=="roll":
+func slide_function(delta) -> void:
+	if !anim.current_animation=="slide":
 		cur_state = states.IDLE
 	else:
-		stop(delta)
+		velocity.x = max_slide_speed*get_sprite_direction()
+		
 
 
 
@@ -235,42 +244,21 @@ func attack3_function(delta) -> void:
 
 
 #need finish
-func jump_function(delta) -> void:
-	if Input.is_action_just_pressed("attack"):						#attack1
+func jump_function(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):					#attack
 		is_jumping = false
 		cur_state = states.ATTACK1
 		anim.play("attack1")
-	elif Input.is_action_just_pressed("jump") && jump_num>0:		#double jump
+	elif Input.is_action_pressed("jump") && jump_num > 0:		#double jump
 		jump(delta)
-	elif !anim.current_animation=="jump":							#fall
+	elif velocity.y > 0:  										#fall
 		is_jumping = false
-		cur_state = states.FALL
-	else:															#upwards logic
+	else:														#movement
 		move(delta)
 		velocity.y += get_gravity() * delta
-		anim.play("jump")
-	
-	
-	
-	
-	
-	#if velocity.y>0:														#falling
-		#is_jumping = false
-		#cur_state = states.FALL
-	#elif jump_num>0 && Input.is_action_just_pressed("jump"):				#double jump
-		#is_jumping = true
-		#velocity.y = jump_velocity
-		#jump_num -= 1
-	#elif Input.is_action_just_pressed("attack"):							#attack1
-		#is_jumping = false
-		#cur_state = states.ATTACK1
-		#anim.play("attack1")
-	#elif velocity.y<0: 														#jump logic
-		#is_jumping = true
-		#move(delta)
-		#velocity.y += get_gravity() * delta
-		#anim.play("jump")
 
+	
+		
 
 
 #need finish
