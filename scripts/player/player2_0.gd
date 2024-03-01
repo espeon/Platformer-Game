@@ -59,7 +59,7 @@ var cur_state = states.IDLE
 
 
 func _process(delta):
-	print(cur_state, " ", debug, " ", is_jumping, " ", velocity.y, " ")
+	print(cur_state, " ", debug, " ", jump_num , " ", is_jumping, " ", velocity.y, " ")
 	print()
 	horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 	if position.y>1000:
@@ -102,11 +102,11 @@ func jump(delta):
 	is_jumping = true
 	velocity.y = jump_velocity
 	cur_state = states.JUMP
-	jump_num -= 1
 	if jump_num == max_jump_num:	# Single jump
 		anim.play("jump")
 	else:							# Double jump
 		anim.play("roll")
+	jump_num -= 1
 
 #need finish
 func idle_function(delta) -> void: 
@@ -199,7 +199,6 @@ func slide_function(delta) -> void:
 
 
 
-#need finish
 func attack1_function(delta) -> void:
 	if !anim.current_animation=="attack1" && is_attack_combo: #to attack2
 		cur_state = states.ATTACK2
@@ -216,7 +215,6 @@ func attack1_function(delta) -> void:
 
 
 
-#need finish
 func attack2_function(delta) -> void:
 	if !anim.current_animation=="attack2" && is_attack_combo: #to attack3
 		cur_state = states.ATTACK3
@@ -233,7 +231,6 @@ func attack2_function(delta) -> void:
 
 
 
-#need finish
 func attack3_function(delta) -> void:
 	if !anim.current_animation=="attack3": #to idle
 		cur_state = states.IDLE
@@ -249,16 +246,17 @@ func jump_function(delta: float) -> void:
 		is_jumping = false
 		cur_state = states.ATTACK1
 		anim.play("attack1")
-	elif Input.is_action_pressed("jump") && jump_num > 0:		#double jump
+	elif Input.is_action_just_pressed("jump") && jump_num > 0:		#double jump
 		jump(delta)
 	elif velocity.y > 0:  										#fall
 		is_jumping = false
 	else:														#movement
-		move(delta)
+		if horizontal_direction!=0:
+			move(delta)
+		else:
+			stop(delta)
 		velocity.y += get_gravity() * delta
 
-	
-		
 
 
 #need finish
@@ -272,7 +270,11 @@ func fall_function(delta) -> void:
 	elif Input.is_action_just_pressed("jump") && jump_num>0:	#double jump
 		jump(delta)
 	elif !is_on_floor():											#falling logic
-		move(delta)
+		if horizontal_direction!=0:
+			move(delta)
+		else:
+			stop(delta)
+		
 		velocity.y += get_gravity() * delta
 		if velocity.y>max_speed.y:
 			velocity.y = max_speed.y
