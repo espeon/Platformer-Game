@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=45 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://assets/textures/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scripts/player/player2_0.gd" id="1_fo42m"]
 [ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/character bodies/player/lives/lives.tscn" id="2_73gsv"]
+[ext_resource type="PackedScene" uid="uid://bgrkhmjf3p3qv" path="res://scenes/minimap/minimap.tscn" id="2_du10u"]
 [ext_resource type="Script" path="res://scripts/state.gd" id="2_dxph1"]
 [ext_resource type="PackedScene" uid="uid://b31s6qorjobrg" path="res://scenes/character bodies/player/jump_particles/jump_particles.tscn" id="3_2w600"]
 [ext_resource type="Script" path="res://scripts/player/state machine/Idle.gd" id="3_17c31"]
@@ -535,6 +536,8 @@ collision_mask = 5
 script = ExtResource("1_fo42m")
 metadata/player = false
 
+[node name="Minimap" parent="." instance=ExtResource("2_du10u")]
+
 [node name="State" type="Node" parent="."]
 script = ExtResource("2_dxph1")
 
@@ -548,8 +551,7 @@ script = ExtResource("3_17c31")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"jump"
-frame = 3
+animation = &"idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
