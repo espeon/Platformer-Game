@@ -1,11 +1,11 @@
 [gd_resource type="SpriteFrames" load_steps=76 format=3 uid="uid://g8e7gfpmlbl2"]
 
-[ext_resource type="Texture2D" uid="uid://dsanxw6on4r32" path="res://assets/textures/enemies/skeleton1.0/Skeleton_damage.png" id="1_ppftm"]
-[ext_resource type="Texture2D" uid="uid://bmb54f1gx517h" path="res://assets/textures/enemies/skeleton1.0/Skeleton_attack.png" id="1_yyd0k"]
-[ext_resource type="Texture2D" uid="uid://68kn1px8xhl0" path="res://assets/textures/enemies/skeleton1.0/Skeleton_death.png" id="2_jbvpd"]
-[ext_resource type="Texture2D" uid="uid://r4k38of3yeh" path="res://assets/textures/enemies/skeleton1.0/Skeleton_idle.png" id="3_16q66"]
-[ext_resource type="Texture2D" uid="uid://ci2qlhp8pa57f" path="res://assets/textures/enemies/skeleton1.0/Skeleton_spot_player.png" id="4_ru5ku"]
-[ext_resource type="Texture2D" uid="uid://dbv73l7fgnk2r" path="res://assets/textures/enemies/skeleton1.0/Skeleton_walk.png" id="5_xu7oi"]
+[ext_resource type="Texture2D" uid="uid://dsanxw6on4r32" path="res://assets/enemies/skeleton1.0/Skeleton_damage.png" id="1_ppftm"]
+[ext_resource type="Texture2D" uid="uid://bmb54f1gx517h" path="res://assets/enemies/skeleton1.0/Skeleton_attack.png" id="1_yyd0k"]
+[ext_resource type="Texture2D" uid="uid://68kn1px8xhl0" path="res://assets/enemies/skeleton1.0/Skeleton_death.png" id="2_jbvpd"]
+[ext_resource type="Texture2D" uid="uid://r4k38of3yeh" path="res://assets/enemies/skeleton1.0/Skeleton_idle.png" id="3_16q66"]
+[ext_resource type="Texture2D" uid="uid://ci2qlhp8pa57f" path="res://assets/enemies/skeleton1.0/Skeleton_spot_player.png" id="4_ru5ku"]
+[ext_resource type="Texture2D" uid="uid://dbv73l7fgnk2r" path="res://assets/enemies/skeleton1.0/Skeleton_walk.png" id="5_xu7oi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3dw6"]
 atlas = ExtResource("1_yyd0k")
