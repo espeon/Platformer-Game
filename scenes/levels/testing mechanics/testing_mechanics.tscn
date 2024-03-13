@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs2ynknivuqov"]
+[gd_scene load_steps=7 format=3 uid="uid://cs2ynknivuqov"]
 
 [ext_resource type="PackedScene" uid="uid://cw1dm3jv5cq12" path="res://scenes/levels/tilemap/tile_map.tscn" id="1_rpmpf"]
 [ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/character bodies/player/Player.tscn" id="2_g27us"]
 [ext_resource type="PackedScene" uid="uid://dfuk0f80uair1" path="res://scenes/backgrounds/paralax_clouds.tscn" id="3_4vhrx"]
 [ext_resource type="PackedScene" uid="uid://c1s8mftritkeq" path="res://scenes/backgrounds/paralax_mountains.tscn" id="3_b2hi8"]
 [ext_resource type="Texture2D" uid="uid://d1n4druoaeqqs" path="res://assets/textures/levels/measuring_background.png" id="6_0kpdo"]
+[ext_resource type="PackedScene" uid="uid://nwvsxdmblq2a" path="res://scenes/character bodies/enemies/skeleton1.0/skeleton1.0.tscn" id="6_ilfpw"]
 
 [node name="Testing Mechanics" type="Node2D"]
 
@@ -18,9 +19,12 @@ offset = Vector2(64, 40)
 transform = Transform2D(1, 0, 0, 1, 64, 40)
 
 [node name="Player" parent="." instance=ExtResource("2_g27us")]
-position = Vector2(155, 128)
+position = Vector2(160, 105)
 
 [node name="MeasuringBackground" type="Sprite2D" parent="."]
 position = Vector2(150, 72)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_0kpdo")
+
+[node name="Skeleton" parent="." instance=ExtResource("6_ilfpw")]
+position = Vector2(195, 102)
