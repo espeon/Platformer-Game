@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmb54f1gx517h"
-path="res://.godot/imported/skeleton_attack.png-c13f66e43fd7df4084a6c71601a9054b.ctex"
+uid="uid://ci2qlhp8pa57f"
+path="res://.godot/imported/skeleton_spot_player_new.png-c20f2875c3fb5190d041b281bc47ff94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/skeleton1.0/skeleton_attack.png"
-dest_files=["res://.godot/imported/skeleton_attack.png-c13f66e43fd7df4084a6c71601a9054b.ctex"]
+source_file="res://assets/enemies/skeleton1.0/skeleton_spot_player_new.png"
+dest_files=["res://.godot/imported/skeleton_spot_player_new.png-c20f2875c3fb5190d041b281bc47ff94.ctex"]
 
 [params]
 
