@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgrkhmjf3p3qv"]
+
+[ext_resource type="Script" path="res://scripts/minimap.gd" id="1_t8h2l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdmmu"]
+bg_color = Color(0, 0.521569, 0.647059, 0.588235)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0588235, 0.537255, 0.517647, 0.588235)
+
+[node name="Minimap" type="CanvasLayer"]
+script = ExtResource("1_t8h2l")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 85.0
+offset_bottom = 62.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fdmmu")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+offset_left = 6.0
+offset_top = 17.0
+offset_right = 1926.0
+offset_bottom = 1097.0
+scale = Vector2(0.04, 0.04)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+offset = Vector2(2.08165e-12, -20)
+zoom = Vector2(2, 2)

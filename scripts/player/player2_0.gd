@@ -75,7 +75,7 @@ var state_names = {
 #*************************************************
 
 func _process(delta):
-	print(state_names[cur_state], " ", debug, " ")
+	#print(state_names[cur_state], " ", debug, " ")
 	horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 	if position.y>1000:
 		position = initial_position

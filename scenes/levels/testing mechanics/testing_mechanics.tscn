@@ -19,7 +19,7 @@ offset = Vector2(64, 40)
 transform = Transform2D(1, 0, 0, 1, 64, 40)
 
 [node name="Player" parent="." instance=ExtResource("2_g27us")]
-position = Vector2(160, 105)
+position = Vector2(159, 126)
 
 [node name="MeasuringBackground" type="Sprite2D" parent="."]
 position = Vector2(150, 72)

@@ -9,6 +9,6 @@ script = ExtResource("1_hymic")
 [node name="hearts" type="Sprite2D" parent="."]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(5, 5)
+position = Vector2(10, 8)
 texture = ExtResource("2_uxnit")
 hframes = 2

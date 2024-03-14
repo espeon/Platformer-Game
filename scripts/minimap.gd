@@ -1,18 +1,21 @@
 extends CanvasLayer
 
-# This is the camera in the subviewport
 @onready var camera = $SubViewportContainer/SubViewport/Camera2D
-# TODO: The tilemap that will be viewed in the minimap
+@onready var sub_viewport = $SubViewportContainer/SubViewport
 @onready var tilemap: TileMap = $"../../TileMap"
-# The tileset that will be used in the minimap
-@export var tileset : TileSet
-
-# The node to focus on
 @onready var player: Node2D = $"../../Player"
 
 func _ready():
-	var duped: TileMap = tilemap.duplicate()
-	$SubViewportContainer/SubViewport.add_child(duped)
+	if tilemap:
+		var tilemap_dup: TileMap = tilemap.duplicate()
+		sub_viewport.add_child(tilemap_dup)
+		
+	#for node in get_tree().get_root().get_child(0).get_children():
+		#print(node)
+		#if !(node is Player):
+			#print(node)
+			#var dup = node.duplicate()
+			#sub_viewport.add_child(dup)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
