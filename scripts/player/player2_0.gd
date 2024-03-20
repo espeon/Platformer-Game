@@ -74,6 +74,11 @@ var state_names = {
 }
 #*************************************************
 
+
+func _ready():
+	jump_particles.scale_amount_max = 0;
+	jump_particles.emitting = true;
+
 func _process(delta):
 	#print(state_names[cur_state], " ", debug, " ")
 	horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -120,6 +125,9 @@ func jump():
 		anim.play("jump")
 	else:							# Double jump
 		anim.play("roll")
+	# get jump direction
+	jump_particles.scale_amount_max = 1;
+	jump_particles.emitting = true;
 	jump_num -= 1
 
 func attack():

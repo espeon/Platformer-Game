@@ -523,6 +523,8 @@ script = ExtResource("3_17c31")
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
 
 [node name="JumpParticles" parent="." instance=ExtResource("3_2w600")]
+amount = 32
+explosiveness = 0.83
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
